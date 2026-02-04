@@ -159,7 +159,7 @@ const CustomerMaintenance = () => {
         showSnackbar(t("customers.error"), "error");
       }
     }
-  }, [t, setValue]);
+  }, [setValue, showSnackbar, t]);
 
   const onSubmit = (data: CustomerFormData) => {
     if (isEditMode) {

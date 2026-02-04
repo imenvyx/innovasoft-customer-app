@@ -1,46 +1,163 @@
-# Getting Started with Create React App
+# Innovasoft Customer Management App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicación SPA para el mantenimiento de clientes desarrollada como prueba técnica para Innovasoft S.A.
 
-## Available Scripts
+## 📋 Descripción
 
-In the project directory, you can run:
+Esta aplicación permite gestionar clientes con las siguientes operaciones:
+- **Crear**: Registro de nuevos clientes
+- **Listar**: Visualización de clientes existentes con filtros
+- **Detalle**: Ver información completa de un cliente
+- **Actualizar**: Modificar datos de clientes existentes
+- **Consultar**: Búsqueda por nombre e identificación
+- **Eliminar**: Eliminación de clientes
 
-### `npm start`
+## 🛠️ Tecnologías
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| React | v17 | Framework principal |
+| TypeScript | v4+ | Tipado estático |
+| Material UI | v5 | Componentes UI |
+| React Router Dom | v6 | Navegación |
+| TanStack Query | v5 | Estado del servidor |
+| React Hook Form | v7 | Manejo de formularios |
+| Zod | v3 | Validación de esquemas |
+| i18next | v22 | Internacionalización |
+| Axios | v1 | Cliente HTTP |
+| Date-fns | v2 | Manipulación de fechas |
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 📁 Estructura del Proyecto
 
-### `npm test`
+```
+src/
+├── api/                    # Configuración y servicios Axios
+│   ├── axiosConfig.ts      # Configuración base de Axios
+│   └── apiEndpoints.ts     # Endpoints de la API
+├── components/            # Componentes reutilizables
+│   └── layout/            # Componentes de layout
+│       ├── AppBar.tsx     # Barra de navegación superior
+│       ├── MainLayout.tsx # Layout principal
+│       └── Sidebar.tsx    # Menú lateral
+├── contexts/              # Contextos de React
+│   └── AuthContext.tsx    # Estado de autenticación
+├── constants/             # Constantes globales
+│   └── index.ts           # Constantes compartidas
+├── hooks/                 # Custom hooks
+│   └── useSnackbar.ts     # Hook para notificaciones
+├── i18n/                  # Configuración de idiomas
+│   └── index.ts           # Traducciones
+├── pages/                 # Páginas de la aplicación
+│   ├── auth/              # Autenticación
+│   │   ├── Login.tsx     # Login
+│   │   └── Register.tsx  # Registro
+│   ├── customers/        # Gestión de clientes
+│   │   ├── CustomerQuery.tsx    # Listado y búsqueda
+│   │   └── CustomerMaintenance.tsx # Crear/Editar
+│   ├── error/            # Páginas de error
+│   │   └── ErrorPage.tsx
+│   └── home/
+│       └── Home.tsx      # Página principal
+├── routes/                # Configuración de rutas
+│   └── AppRoutes.tsx     # Definición de rutas
+├── theme/                 # Tema de Material UI
+│   └── index.ts          # Configuración del theme
+├── types/                 # Tipos TypeScript
+│   └── index.ts          # Definiciones de tipos
+├── utils/                 # Utilidades
+│   └── formatDate.ts     # Funciones de formato
+├── App.tsx               # Componente raíz
+└── index.tsx             # Entry point
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Instalación
 
-### `npm run build`
+### Prerrequisitos
+- Node.js v14 o superior
+- npm v6 o superior
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Pasos
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clonar el repositorio
+2. Instalar dependencias:
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Configurar variables de entorno (si aplica):
+```bash
+cp .env.example .env
+```
 
-### `npm run eject`
+4. Iniciar el servidor de desarrollo:
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+La aplicación estará disponible en `http://localhost:3000`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📦 Scripts Disponibles
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+| Comando | Descripción |
+|---------|------------|
+| `npm start` | Inicia el servidor de desarrollo |
+| `npm run build` | Construye la app para producción |
+| `npm test` | Ejecuta los tests |
+| `npm run lint` | Verifica el código con ESLint |
+| `npm run format` | Formatea el código con Prettier |
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 🔐 Autenticación
 
-## Learn More
+La aplicación usa autenticación JWT con tokens Bearer.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Flujo de autenticación:
+1. El usuario inicia sesión con credentials
+2. El servidor retorna un token JWT
+3. El token se almacena en localStorage
+4. Todas las peticiones subsiguientes incluyen el token
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Endpoints de autenticación:
+- **POST** `/api/Authenticate/login` - Inicio de sesión
+- **POST** `/api/Authenticate/register` - Registro de usuario
+
+## 📡 API de Clientes
+
+| Método | Endpoint | Descripción |
+|--------|----------|------------|
+| GET | `/api/Intereses/Listado` | Lista de intereses |
+| GET | `/api/Cliente/Obtener/{id}` | Obtener cliente |
+| POST | `/api/Cliente/Listado` | Listar clientes |
+| POST | `/api/Cliente/Crear` | Crear cliente |
+| POST | `/api/Cliente/Actualizar` | Actualizar cliente |
+| DELETE | `/api/Cliente/Eliminar/{id}` | Eliminar cliente |
+
+## 🎨 Personalización
+
+### Tema
+El tema de Material UI se configura en `src/theme/index.ts`:
+- Colores primarios y secundarios
+- Tipografía
+- Breakpoints responsivos
+- Componentes personalizados
+
+### Internacionalización
+Los archivos de traducción están en `public/locales/`:
+- `en/` - Inglés
+- `es/` - Español
+
+## 🔧 Configuración
+
+### API Base
+La URL base de la API se configura en `src/api/axiosConfig.ts`:
+```typescript
+const API_BASE_URL = "https://pruebareactjs.test-class.com/Api/";
+```
+## 📱 Responsive Design
+
+El diseño es completamente responsive:
+- **Desktop (>980px)**: Sidebar permanente con opción de colapsar
+- **Móvil (<980px)**: Drawer temporal que cubre toda la pantalla
+
+## 📄 Licencia
+
+Este proyecto es propiedad de Innovasoft S.A. - Todos los derechos reservados © 2022

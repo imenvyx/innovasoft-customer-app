@@ -86,6 +86,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = useCallback(() => {
     setUser(null);
+    // Solo limpiar tokens de autenticación, NO rememberedUsername ni rememberMe
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
   }, []);

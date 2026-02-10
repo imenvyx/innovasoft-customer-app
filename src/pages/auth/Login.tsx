@@ -70,7 +70,9 @@ const Login = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      // Save username if rememberMe is checked
+      // Save rememberMe state and username if checked
+      localStorage.setItem('rememberMe', rememberMe.toString());
+      
       if (rememberMe) {
         localStorage.setItem('rememberedUsername', data.username);
       } else {

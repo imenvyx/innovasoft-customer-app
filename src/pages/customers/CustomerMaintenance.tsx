@@ -540,7 +540,7 @@ const CustomerMaintenance = () => {
               type="submit"
               variant="contained"
               startIcon={<Save />}
-              disabled={createMutation.isPending || updateMutation.isPending}
+              disabled={createMutation.isLoading || updateMutation.isLoading}
             >
               {t("customers.save")}
             </Button>
